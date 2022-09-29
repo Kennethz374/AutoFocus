@@ -1,19 +1,17 @@
 import React from "react";
 
-const Video = () => {
+const AllInFocus = () => {
     return (
-        // {/* original wid = 560, height=315 */}
         <iframe
-            width="360"
+            width="560"
             height="315"
-            src="https://www.youtube.com/embed/EA-6o1_vrsA"
+            src="https://www.youtube.com/embed/dEE2c2oXq2M?playlist=dEE2c2oXq2M&autoplay=1&controls=0&mute=0&loop=1"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
-            className="m-5"
         ></iframe>
     );
 };
 
-export default Video;
+export default AllInFocus;

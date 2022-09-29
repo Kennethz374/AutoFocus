@@ -23,10 +23,11 @@ ChartJS.register(
 
 const LineChart = () => {
     const [height, setHeight] = useState([]);
-    const [index, setIndex] = useState({ start: 0, end: 28 });
+    const [currentL, setCurrentL] = useState([]);
+    const [value, setValue] = useState([]);
 
     const fetchData = async () => {
-        const res = await fetch(`http://localhost:5000/data2`);
+        const res = await fetch(`http://localhost:5000/data`);
         const data = await res.json();
         setHeight(data);
         //ie: data [{id:"1", value:2}]
@@ -37,14 +38,7 @@ const LineChart = () => {
         //     fetchData();
         // }, 1500);
         fetchData();
-        const interval = setInterval(() => {
-            setIndex((prevState) => ({
-                start: index.start + 1,
-                end: index.end + 1,
-            }));
-        }, 500);
-        return () => clearInterval(interval);
-    }, [index]);
+    }, []);
 
     const options = {
         responsive: true,
@@ -54,14 +48,14 @@ const LineChart = () => {
             },
             title: {
                 display: true,
-                text: "Lense Focus Motor Step",
+                text: "Distance Readout",
             },
         },
         scales: {
             y: {
                 title: {
                     display: true,
-                    text: "Step",
+                    text: "Distance in cm",
                 },
             },
             x: {
@@ -79,6 +73,7 @@ const LineChart = () => {
     const currentLabels = (labels) => {
         let cLabels = [];
         for (let item of labels) {
+            setInterval(() => cLabels.push(item), 2000);
             cLabels.push(item);
         }
         if (cLabels.length >= 12) {
@@ -89,7 +84,7 @@ const LineChart = () => {
     const currentHeightValues = (heightValues) => {
         let chValues = [];
         for (let item of heightValues) {
-            chValues.push(item);
+            setInterval(() => chValues.push(item), 2000);
         }
         if (chValues.length >= 12) {
             const newValues = chValues.slice(
@@ -102,14 +97,14 @@ const LineChart = () => {
     };
 
     const data = {
-        labels: labels.slice(index.start, index.end),
+        labels: labels,
         datasets: [
             //line 1
             {
                 label: "Raw Output",
-                data: heightValues.slice(index.start, index.end),
-                borderColor: "rgb(0,128,0)",
-                backgroundColor: "rgba(0, 128, 0, 0.5)",
+                data: heightValues,
+                borderColor: "rgb(255, 99, 132)",
+                backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
         ],
     };

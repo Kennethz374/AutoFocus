@@ -1,15 +1,14 @@
 import Head from "next/head";
 import LineChart from "../components/LineChart";
 import LineChart2 from "../components/LineChart2";
+import LocalChart1 from "../components/LocalLineChart1";
 import Scene from "../components/R3F/Scene";
-import Video from "../components/Video";
-import FakeStreaming from "../components/FakeStreaming";
-
+import ALLInFocus from "../components/AllInFocus";
+import OutofFocus from "../components/OutofFocus";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
+import Decoding from "../components/Decoding";
 
 export default function Home() {
     const [isFocusing, setIsFocusing] = useState(true);
@@ -36,10 +35,10 @@ export default function Home() {
                         {/* <Scene /> */}
                         {/* Line Chart */}
                         <div className=" w-full rounded-md bg-gray-800 mt-2">
-                            <LineChart />
+                            {/* <LineChart /> */}
                         </div>
                         <div className=" w-full rounded-md bg-gray-800 mt-4">
-                            <LineChart2 />
+                            {/* <LineChart2 /> */}
                         </div>
 
                         {isFocusing ? (
@@ -68,28 +67,16 @@ export default function Home() {
                                     Live Streaming Here...
                                 </h1>
                                 <div className="flex justify-center my-4">
-                                    <Video />
-                                    {/* <FakeStreaming /> */}
+                                    {isFocusing ? (
+                                        <ALLInFocus />
+                                    ) : (
+                                        <OutofFocus />
+                                    )}
                                 </div>
                             </div>
 
                             {/* bottom */}
-                            <div className="mt-4 rounded-md bg-gray-800 w-full flex flex-col h-72 ">
-                                <h1 className="text-white font-body  mt-3 text-sm border-b-2 border-gray-400 mx-3">
-                                    Decoding Status
-                                </h1>
-                                <div className="DecodeingInfo flex m-2 gap-5 mt-3">
-                                    <div className="h-48 w-1/2 bg-gray-800 flex justify-center">
-                                        <img
-                                            src="/20cm_workdistance_0_iris.png"
-                                            className="object-fill"
-                                        />
-                                    </div>
-                                    <div className="h-48 w-1/2 bg-white">
-                                        <p>Result...</p>
-                                    </div>
-                                </div>
-                            </div>
+                            {/* <Decoding /> */}
                         </div>
                     </div>
                 </section>
